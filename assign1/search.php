@@ -7,18 +7,16 @@ if(isset($_POST['search']))
     // id to search
     $id = $_POST['id'];
     
-
-    
     // mysql search query
-    $query = "SELECT `userid` FROM `tds_user` WHERE `id` = $id LIMIT 1";
+    $query = "SELECT `responsible_person_name` FROM `tds_user` WHERE `id` = $id LIMIT 1";
     
-    $result = mysqli_query($connect, $query);
+    //$result = mysqli_query($db, $query);
     
     // if id exist 
     // show data in inputs
-    if(mysqli_num_rows($result) > 0)
+    if($result = mysqli_query($db, $query))
     {
-      while ($row = mysqli_fetch_array($result))
+      while ($row = mysqli_fetch_row($result))
       {
      
     $userid = $row['userid'];
@@ -30,39 +28,40 @@ if(isset($_POST['search']))
     $created_on = $row['created_on'];
     $Status = $row['Status'];
       }  
-    }
+   }
     
     // if the id not exist
     // show a message and clear inputs
-    else {
-        echo "Undifined ID";
-    $userid = "";
-    $responsible_person_name = "";
-    $email_id = "";
-    $password = "";
-    $role_id = "";
-    $mobile = "";
-    $created_on = "";
-    $Status = "";
-    }
+     else {
+         echo "Undifined ID";
+     $userid = "";
+     $responsible_person_name = "";
+     $email_id = "";
+     $password = "";
+     $role_id = "";
+     $mobile = "";
+     $created_on = "";
+     $Status = "";
+     }
     
     
     mysqli_free_result($result);
-    mysqli_close($connect);
+
+    mysqli_close($db);
     
 }
 
 // in the first time inputs are empty
-else{
-    $userid = "";
-    $responsible_person_name = "";
-    $email_id = "";
-    $password = "";
-    $role_id = "";
-    $mobile = "";
+ else{
+     $userid = "";
+     $responsible_person_name = "";
+     $email_id = "";
+     $password = "";
+     $role_id = "";
+     $mobile = "";
     $created_on = "";
-    $Status = "";
-}
+     $Status = "";
+ }
 
 
 ?>
@@ -89,7 +88,7 @@ else{
 
         Id:<input type="text" name="id"><br><br>
 
-        User:<input type="text" name="fname" value="<?php echo $userid;?>"><br>
+        User Name:<input type="text" name="fname" value="<?php echo $userid; ?>"><br>
 
         <input type="submit" name="search" value="Find">
 
