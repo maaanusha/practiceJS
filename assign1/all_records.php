@@ -15,14 +15,16 @@
     <td>role_id</td>
     <td>mobile</td>
     <td>created_on</td>
-    <td>status</td>
+    <td>Status</td>
+    <td>edit</td>
+    <td>delete</td>
   </tr>
 
 <?php
 
 include "dbConn.php"; // Using database connection file here
 
-$records1 = mysqli_query($db,"select * from tds_user"); // fetch data from database
+$records1 = mysqli_query($db,"SELECT * FROM tds_user WHERE role_id='2'"); // fetch data from database
 while($data = mysqli_fetch_array($records1))
 {
 ?>
@@ -34,7 +36,9 @@ while($data = mysqli_fetch_array($records1))
     <td><?php echo $data['role_id']; ?></td>
     <td><?php echo $data['mobile']; ?></td>
     <td><?php echo $data['created_on']; ?></td>
-    <td><?php echo $data['status']; ?></td>
+    <td><?php echo $data['Status']; ?></td>
+     <td><a href="edit.php?id=<?php echo $data['userid']; ?>">Edit</a></td>
+    <td><a href="delete.php?id=<?php echo $data['userid']; ?>">Delete</a></t>
   </tr> 
 <?php
 }
@@ -51,13 +55,15 @@ while($data = mysqli_fetch_array($records1))
     <td>pincode</td>
     <td>state</td>
     <td>area</td>
+    <td>edit</td>
+    <td>delete</td>
   </tr>
 <h2>Customer Address</h2>
 <?php
 
 include "dbConn.php"; // Using database connection file here
 
-$records2 = mysqli_query($db,"select * from tds_customer_address"); // fetch data from database
+$records2 = mysqli_query($db,"select * from tds_customer_address where area = 'koramangala'"); // fetch data from database
 while($data = mysqli_fetch_array($records2))
 {
 ?>
@@ -71,6 +77,8 @@ while($data = mysqli_fetch_array($records2))
     <td><?php echo $data['pincode']; ?></td>
     <td><?php echo $data['state']; ?></td>
     <td><?php echo $data['area']; ?></td>
+     <td><a href="edit.php?id=<?php echo $data['address_id']; ?>">Edit</a></td>
+    <td><a href="delete.php?id=<?php echo $data['address_id']; ?>">Delete</a></td>
   </tr> 
 <?php
 }
